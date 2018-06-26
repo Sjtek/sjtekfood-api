@@ -2,6 +2,7 @@ package nl.sjtek.food.controllers;
 
 import nl.sjtek.food.models.Meal;
 import nl.sjtek.food.repository.MealRepository;
+import nl.sjtek.food.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,10 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class MealController {
 
     private final MealRepository mealRepository;
+    private final TagRepository tagRepository;
 
     @Autowired
-    public MealController(MealRepository mealRepository) {
+    public MealController(MealRepository mealRepository, TagRepository tagRepository) {
         this.mealRepository = mealRepository;
+        this.tagRepository = tagRepository;
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)

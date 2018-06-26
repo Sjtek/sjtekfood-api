@@ -1,17 +1,19 @@
 package nl.sjtek.food.models;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Meal {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private long id;
     private String name;
+    @ManyToMany
+    @JoinColumn
+    private List<Tag> tag;
 
     public Meal() {
     }
@@ -20,11 +22,11 @@ public class Meal {
         this.name = name;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -36,23 +38,12 @@ public class Meal {
         this.name = name;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Meal meal = (Meal) o;
-
-        if (!id.equals(meal.id)) return false;
-        return name != null ? name.equals(meal.name) : meal.name == null;
-
+    public List<Tag> getTag() {
+        return tag;
     }
 
-    @Override
-    public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        return result;
+    public void setTag(List<Tag> tag) {
+        this.tag = tag;
     }
 
     @Override
